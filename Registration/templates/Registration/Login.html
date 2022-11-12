@@ -1,0 +1,75 @@
+{% extends 'Registration/base.html' %}
+    {% load static %}
+    {% block title %}Talent Hunt | Login{% endblock %}
+    {% block header %}
+    <style>
+        body, html {
+            height: 100%;
+            color: chartreuse;
+        }
+        .bg {
+            background-image: url("{% static 'Registration/Images/BackGround4.jpg' %}");
+            height: 100%;
+            width: 100%;
+            background-position: right top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: scroll;
+        }
+    </style>
+    {% endblock %}
+    {% block content %}
+    <div class = "bg  container-fluid " >
+        <div class = " row justify-content-around h-100 row align-items-center">
+            <div class = "col-4 text-center">
+                {% if error %}
+                <span class="alert alert-danger">{{error}}</span>
+                <br>
+                <br>
+                {% endif %}    
+                <div class = "card-transparent" style="background-color: rgba(86, 88, 88, 0.39); " >
+                    <div class="card-header">
+                        <img class="card-img-top" style="width: 8rem;" src="{% static 'Registration/Images/Logo4.png' %}" alt="TH Logo" width=30%>
+                    </div>
+                    <div class="card-body" >
+                        <form action="{% url 'Registration:Login' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                            </svg>
+                                        </i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Username" name="username">
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-key">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-key-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                            </svg>
+                                        </i>
+                                    </span>
+                                </div>
+                                <input type="password" class="form-control" placeholder="Password" name="password">
+                            </div>
+                            <button type='submit' class='btn btn-primary btn-lg'>Login</button>
+                        </form>
+                    </div>
+                    <div class = "card-footer">
+                        <form action="{% url 'Registration:SignUp' %}" method='GET'>
+                            <label style="color: honeydew"><strong>Don't have an account? </strong></label>
+                            <br>
+                            <button type='submit' class='btn btn-success'>Sign Up</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %} 

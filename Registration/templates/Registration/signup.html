@@ -1,0 +1,87 @@
+{% extends 'Registration/base.html' %}
+{% load static %}
+{% block title %}Talent Hunt | SignUp{% endblock %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'Registration\background.css' %}">
+{% endblock %}
+{% block content %}
+    <div class = "bg container-fluid">
+        <div class = "row align-items-center">
+            <div class = "col-sm-12">
+                <div class = "row justify-content-center">
+                    <div class="col-sm-12 d-flex justify-content-center">
+                        <img src="{% static 'Registration/Images/Logo4.png' %}" alt="TH Logo" width=7%>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 d-flex justify-content-center">
+                        {% if error %}
+                        <span class="alert alert-danger">{{error}}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <br>
+                <form action = "{% url 'Registration:SignUp' %}" method='POST'>
+                    {% csrf_token %}
+                    <div class="row justify-content-center" style="color: floralwhite;">
+                        <div class="col-sm-3" style="height: 8rem;">
+                            <label for='username'>Username: </label>
+                            <input type='text' id='username' name='username' placeholder="Username" class = "form-control">
+                            <br>
+                            <label for='first_name'>First Name: </label>
+                            <input type='text' id='first_name' name='first_name' class="form-control" placeholder="First Name">
+                            <br>
+                            <label for='last_name'>Last Name: </label>
+                            <input type='text' id='last_name' name='last_name' placeholder="Last Name" class="form-control">
+                            <br>
+                            <label for='email'>E-mail Address: </label>
+                            <input type='email' id='email' name='email' placeholder="E-mail Address" class="form-control">
+                            <br>
+                            <label for='password1'>Password: </label>
+                            <input type='password' id='password1' name='password1' placeholder="Password" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                        </div>
+                        <div class="col-sm-3">
+                            <label for='password2'>Confirm Password: </label>
+                            <input type='password' id='password2' name='password2' placeholder="Confirm Password" class="form-control">
+                            <br>
+                            <label for='gender'>Gender: </label><br>
+                            <div class="form-check-inline">
+                                <input type='radio' name='gender' value='Male' id='male' class="form-check-input">
+                                <label for='male' class="form-check-label">Male</label>
+                            </div>
+                            <div class="form-check-inline">
+                                <input type='radio' name='gender' value='Female' id='female' class="form-check-input">
+                                <label for='female' class="form-check-label">Female</label>
+                            </div>
+                            <br><br>
+                            <label for='mobile'>Mobile Number: </label>
+                            <input type='number' id='mobile' name='mobile' class="form-control" placeholder="Mobile Number">
+                            <br>
+                            <label for='dob'>Date of Birth: </label>
+                            <input type='date' id='dob' name='dob' class="form-control">
+                            <br>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-12 d-flex justify-content-center">
+                                    <button type='submit' class="btn btn-dark btn-lg">Sign Up</button>
+                                </div>
+                            </div>
+                        </form>
+                        <br>
+                        <form action = "{% url 'Registration:Login' %}" method="GET">
+                            <div class="row justify-content-center">
+                                <div class="col-sm-12 d-flex justify-content-center">
+                                    <label style="color: rgb(0, 0, 0);"><strong>Already have an account?</strong> 
+                                        <button type='submit' class="btn btn-secondary">Login</button>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+.teamlist{
+    display: block;
+    height: 50vh;
+    width: 35vw;
+    overflow: auto;
+    border-style: inset;
+    border-color: black;
+    border-radius: 10px;
+}
+.item{
+    display: flex;
+    align-items: center;
+    height: 15%;
+    width: 100%;
+    border-bottom-style: inset;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-color: rgb(38, 37, 37);
+}
+.tick{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 2px;
+    order: 2;
+}
+.itemtext{
+    display: flex;
+    align-items: center;
+    width : 64%;
+    height: 100%;
+    line-height: 100%;
+    overflow: auto;
+}

@@ -1,0 +1,63 @@
+{% extends 'Details/base.html' %}
+{% load static %}
+{% block title %}Skills Details{% endblock %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static 'Details/skills.css' %}">
+<script type="text/javascript" src="{% static 'Details/skills.js' %}"></script>
+<script>
+    $(function(){
+        $("#sub").click(function(){
+            var len = $(".tokenValues").length;
+            var arr = [];
+            for(var i = 0; i < len; i++){
+                arr.push($(".tokenValues").eq(i).text());
+            }
+            $.ajax({
+                type:"POST",
+                url:"{% url 'Details:Skills' %}",
+                data:{
+                    'csrfmiddlewaretoken':"{{csrf_token}}",
+                    'skillset': arr,
+                    'specialization': $("#specialization").val(),
+                    'pastexp': $("#pastexp").val(),
+                    'workexpec': $("#workexpec").val(),
+                    'bio': $("#bio").val(),
+                },
+                success: function(response){
+                    if (response.status == 0){
+                        window.location = "{% url 'Details:Feed' page=1 %}";
+                    }
+                },
+                dataType: 'json'
+            });
+        });
+    });
+</script>
+{% endblock %}
+{% block content %}
+<form>
+    {% csrf_token %}
+    <div class="input-group">
+        <input type="text" id="chipValue" class="form-control" placeholder="Add">
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-outline-primary" id="addToken">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div id="tokens">
+    </div>
+    <label for="specialization">Specialization</label>
+    <textarea id="specialization" name="specialization"></textarea>
+    <label for="pastexp">Past Experiences</label>
+    <textarea id="pastexp" name="pastexp"></textarea>
+    <label for="workexpec">Work Expectations</label>
+    <textarea id="workexpec" name="workexpec"></textarea>
+    <label for="bio">Bio</label>
+    <textarea id="bio" name="bio"></textarea>
+    <button type="button" id="sub">Submit</button>
+</form>
+{% endblock %}

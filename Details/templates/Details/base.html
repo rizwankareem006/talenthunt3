@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Base{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="{% static 'Registration/Images/Logo3.png' %}">
+    <style>
+        html,body {
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                margin:0;
+                padding:0;
+        }
+
+        #navbar {
+            padding: .8rem;
+            background: rgba(34, 34, 34, 0.808);
+            align-self: center;
+        }
+
+        .navbar-nav li {
+            padding-right: 20px;
+        }
+
+        .nav-btn {
+            background: none !important;
+            border: none;
+        }
+
+        .nav-btn:hover {
+            color: rgb(107, 107, 107);
+        }
+
+        #nav-search {
+            width: 15em;
+            height: 1.5em;
+        }
+
+        .right {
+            align-self: flex-end;
+        }
+    </style>
+    {% block header %}
+
+    {% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top" >
+        <div class = "container-fluid">
+            <a class="navbar-brand" href="{% url 'Details:Feed' page=1 %}">
+                <img src="{% static 'Registration\Images\Logo3.png' %}" width="50" height="25" alt="Talent Hunt Logo">
+                Talent Hunt
+            </a>
+            <ul class="navbar-nav ml-auto">
+                
+                <li class="nav-item active" style="padding: 0rem 35rem 0rem 0rem;">
+                    <form method="GET" action="{% url 'Details:Search' page=1 %}">
+                        <div id="nav-search" class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search" name="search">
+                            <div class="input-group-append">
+                                <button class="btn btn-dark" type="submit">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form action="{% url 'Details:Profile' username=request.user %}" method = "POST">
+                        {% csrf_token %}
+                        <button class="nav-btn" type="submit" style="padding: 0.5rem 1.5rem;">Profile</button>
+                    </form>
+                </li>
+                <li class="nav-item dropdown">
+                    <div class="right">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <svg id="icon" width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                                <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left: -10rem;">
+                            <a class="dropdown-item">
+                                {{request.user}}
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'Details:Profile' username=request.user %}">Manage your TH account</a>
+                            <a class="dropdown-item" href="{% url 'Details:Logout' %}">Sign out</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% block content %}
+    
+    {% endblock %}
+</body>
+</html>

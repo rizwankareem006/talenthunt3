@@ -1,0 +1,21 @@
+{% extends 'Details/base.html' %}
+{% load static %}
+{% block title %}Team Creation{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<h1>Create Team</h1>
+{% if error %}
+<h3>{{error}}</h3>
+{% endif %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <label for="teamname">Team Name:</label>
+    <input type="text" id="teamname" name="teamname" required>
+    <label for="teamdescription">Team Description:</label>
+    <textarea id="teamdescription" name="teamdescription" required></textarea>
+    <label for="teammotive">Team Motive:</label>
+    <textarea id="teammotive" name="teammotive" required></textarea>
+    <button type="submit">Create</button>
+</form>
+{% endblock %}
